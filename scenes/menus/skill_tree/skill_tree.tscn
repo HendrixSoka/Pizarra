@@ -1,0 +1,86 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdrofxxlh7bn7"]
+
+[ext_resource type="Script" uid="uid://bg81uuya2stb7" path="res://scripts/player/skill_tree/skill_tree.gd" id="1_88ta2"]
+
+[node name="SkillTree" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_88ta2")
+
+[node name="01" type="Control" parent="."]
+anchors_preset = 0
+
+[node name="1" type="TextureButton" parent="01"]
+layout_mode = 0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_default_cursor_shape = 2
+
+[node name="02" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -192.0
+offset_top = -176.0
+offset_right = -192.0
+offset_bottom = -176.0
+
+[node name="1" type="TextureButton" parent="02"]
+layout_mode = 0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_default_cursor_shape = 2
+
+[node name="03" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 192.0
+offset_top = -176.0
+offset_right = 192.0
+offset_bottom = -176.0
+
+[node name="1" type="TextureButton" parent="03"]
+layout_mode = 0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_default_cursor_shape = 2
+
+[node name="04" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -372.0
+offset_top = -368.0
+offset_right = -372.0
+offset_bottom = -368.0
+
+[node name="1" type="TextureButton" parent="04"]
+layout_mode = 0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_default_cursor_shape = 2
+
+[node name="05" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 404.0
+offset_top = -368.0
+offset_right = 404.0
+offset_bottom = -368.0
+
+[node name="1" type="TextureButton" parent="05"]
+layout_mode = 0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_default_cursor_shape = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -204)
