@@ -17,6 +17,9 @@ const INPUT_BUFFER_DURATIONR: float = 0.25
 var input_buffer_timer: float = INPUT_BUFFER_DURATIONR
 var input_buffer: String
 
+var external_force: Vector2 = Vector2.ZERO
+var external_force_timer: float = 0
+
 const animations: Dictionary = {
 	idle = "idle",
 	walk = "walk",
@@ -54,4 +57,17 @@ func squash_tween():
 	var tween = create_tween()
 	tween.tween_property(sprite_container, "scale", Vector2(1.15, 0.85), 0.075)
 	tween.tween_property(sprite_container, "scale", Vector2(1, 1), 0.075)
-	
+
+func apply_external_force(force: Vector2, duration: float):
+	external_force = force
+	external_force_timer = duration
+func handle_external_forces(delta):
+	if external_force_timer > 0:
+		if abs(external_force.y) > abs(velocity.y):
+			velocity.y += external_force.y * delta * 1.6  # multiplica para que domine
+		else:
+			velocity.y += external_force.y * delta
+		velocity.x += external_force.x * delta
+		external_force_timer -= delta
+		if external_force_timer <= 0:
+			external_force = Vector2.ZERO

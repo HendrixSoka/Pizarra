@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://beggnucib767u"]
+
+[ext_resource type="Script" uid="uid://dstb2ixa1hxp5" path="res://scripts/enviroment/wind/wind.gd" id="1_vqgfe"]
+[ext_resource type="Texture2D" uid="uid://iyy0fqcg4kr6" path="res://assets/sprites/map/windp.png" id="2_n4wxg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n4wxg"]
+
+[node name="Wind" type="Node2D"]
+script = ExtResource("1_vqgfe")
+
+[node name="Wind_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wind_area"]
+shape = SubResource("RectangleShape2D_n4wxg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4.7683716e-07, -4.7683716e-07)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("2_n4wxg")

@@ -5,6 +5,7 @@ func start():
 
 func on_physics_process(delta: float) -> void:
 	super(delta)
+	player.handle_external_forces(delta)
 	player.handle_gravity(delta)
 	player.handle_rotation(player.get_axis())
 	player.move_to(0,0,abs(player.velocity.x * 6.25),delta)
