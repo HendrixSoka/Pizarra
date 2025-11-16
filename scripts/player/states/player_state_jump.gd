@@ -21,8 +21,8 @@ func on_physics_process(delta: float) -> void:
 	elif !Input.is_action_pressed("jump"):
 		player.jump_timer = 0
 	
-	if player.velocity.y >= 0:
-		state_machine.change_to(player.states.fall)	
+	if player.velocity.dot(player.gravity_direction) > 0:
+		state_machine.change_to(player.states.fall)
 		return
 	
 func end():

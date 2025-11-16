@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://x35h0wvm7fe4"]
+
+[ext_resource type="Script" uid="uid://bi3trtcidqids" path="res://scripts/enviroment/stickyZone/sticky_zone.gd" id="1_katay"]
+[ext_resource type="Texture2D" uid="uid://xhq1bt8xgui" path="res://assets/sprites/map/sticky.png" id="2_hw3ia"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7m18x"]
+size = Vector2(11.0625, 11)
+
+[node name="StickyZone" type="Node2D"]
+script = ExtResource("1_katay")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_hw3ia")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_7m18x")

@@ -19,6 +19,7 @@ var input_buffer: String
 
 var external_force: Vector2 = Vector2.ZERO
 var external_force_timer: float = 0
+var gravity_direction: Vector2 = Vector2(0, 1)
 
 const animations: Dictionary = {
 	idle = "idle",
@@ -37,18 +38,34 @@ const states: Dictionary = {
 
 func handle_gravity(delta: float):
 	if !is_on_floor():
-		velocity.y = clamp(velocity.y + gravity_force * delta, -gravity_force, gravity_force * 0.325)
+		var vel_grav = velocity.dot(gravity_direction)
+		vel_grav = clamp(vel_grav + gravity_force * delta, -gravity_force, gravity_force * 0.325)
+		velocity = velocity - gravity_direction * velocity.dot(gravity_direction)
+		velocity += gravity_direction * vel_grav
 
 func move_to(direction: int, speed_potency: float, amount: float, delta: float):
-	velocity.x = move_toward(velocity.x, direction * speed_potency, amount * delta)
+	var perp := gravity_direction.rotated(-PI / 2.0)
+	if perp.dot(Vector2(1,0)) < 0:
+		perp = -perp
+	var current_speed := velocity.dot(perp)
+	var target_speed := direction * speed_potency
+	var new_speed := move_toward(current_speed, target_speed, amount * delta)
+	velocity += perp * (new_speed - current_speed)
 
-func jump_to(potency: float = 1):
-	velocity.y = -jump_force * potency
+
+func jump_to(potency := 1.0):
+	var lateral = velocity - gravity_direction * velocity.dot(gravity_direction)
+	velocity = lateral + (-gravity_direction * jump_force * potency)
+
 
 func handle_rotation(direction: int):
-	if graphics.transform.x.x != direction and direction:
-		graphics.transform.x.x = direction
+	if direction != 0 and graphics.scale.x != direction:
+		graphics.scale.x = direction
 		squash_tween()
+	update_sprite_rotation()
+
+func update_sprite_rotation() -> void:
+	graphics.rotation = gravity_direction.angle() - PI / 2
 
 func get_axis():
 	return sign(Input.get_axis("left","right"))
@@ -71,3 +88,12 @@ func handle_external_forces(delta):
 		external_force_timer -= delta
 		if external_force_timer <= 0:
 			external_force = Vector2.ZERO
+
+func set_custom_gravity(direction: Vector2):
+	var lateral = velocity - gravity_direction * velocity.dot(gravity_direction)
+	gravity_direction = direction.normalized()
+	up_direction = -gravity_direction
+	velocity = lateral
+func reset_gravity():
+	gravity_direction = Vector2(0,1)
+	up_direction = Vector2(0,-1)
